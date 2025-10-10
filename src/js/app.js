@@ -1,6 +1,7 @@
 var hello = "Hello, World!";
 
-// Security hotspot: eval() usage - this is dangerous and allows code injection
-function executeUserCode(userInput) {
-  return eval(userInput);
-}
+var hello2 = "Hello, World! 2";
+
+var hello3 = "Hello, World! 3";
+
+var acceptMe = "Accept Me!";
