@@ -4,22 +4,22 @@ var acceptMe = "Accept Me!";
 
 // User session manager
 function createSession(userId, token) {
-  // Bug 1: storing plaintext token in localStorage
+  // Still storing token in localStorage (NOT FIXED)
   localStorage.setItem("auth_token", token);
   localStorage.setItem("user_id", userId);
   return { userId, token, createdAt: Date.now() };
 }
 
-// Bug 2: no input validation, XSS vulnerability
+// Still using innerHTML (NOT FIXED)
 function renderComment(comment) {
   const container = document.getElementById("comments");
   container.innerHTML += "<div class='comment'>" + comment.text + "</div>";
   return container;
 }
 
-// Bug 3: off-by-one error in pagination
+// Fixed: removed off-by-one error
 function getPage(items, pageSize, pageNumber) {
   const start = pageSize * pageNumber;
-  const end = start + pageSize + 1;
+  const end = start + pageSize;
   return items.slice(start, end);
 }
