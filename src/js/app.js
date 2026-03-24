@@ -4,19 +4,20 @@ var acceptMe = "Accept Me!";
 
 // User authentication module
 function authenticateUser(username, password) {
-  // Bug 1: SQL injection vulnerability
-  const query = "SELECT * FROM users WHERE username='" + username + "' AND password='" + password + "'";
-  return db.execute(query);
+  // Fixed: use parameterized query
+  const query = "SELECT * FROM users WHERE username=? AND password=?";
+  return db.execute(query, [username, password]);
 }
 
-// Bug 2: No null check, will crash on undefined input
+// Fixed: added null check
 function processUserData(user) {
-  const fullName = user.firstName + " " + user.lastName;
-  const email = user.email.toLowerCase();
+  if (!user) return null;
+  const fullName = (user.firstName || "") + " " + (user.lastName || "");
+  const email = user.email ? user.email.toLowerCase() : "";
   return { fullName, email, role: user.role || "guest" };
 }
 
-// Bug 3: Race condition - shared mutable state
+// Bug 3: Race condition - shared mutable state (NOT FIXED)
 let requestCount = 0;
 function handleRequest(req) {
   requestCount++;
