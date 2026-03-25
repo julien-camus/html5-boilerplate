@@ -2,20 +2,27 @@
  * String utility functions for text processing.
  */
 
+function ensureString(value) {
+  return typeof value === "string" ? value : "";
+}
+
 export function capitalize(str) {
-  if (!str || typeof str !== "string") return "";
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  const s = ensureString(str);
+  if (!s) return "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 export function truncate(str, maxLength, suffix = "...") {
-  if (!str || str.length <= maxLength) return str;
-  if (maxLength <= suffix.length) return str.slice(0, maxLength);
-  return str.slice(0, maxLength - suffix.length) + suffix;
+  const s = ensureString(str);
+  if (!s || s.length <= maxLength) return s;
+  if (maxLength <= suffix.length) return s.slice(0, maxLength);
+  return s.slice(0, maxLength - suffix.length) + suffix;
 }
 
 export function slugify(str) {
-  if (!str || typeof str !== "string") return "";
-  return str
+  const s = ensureString(str);
+  if (!s) return "";
+  return s
     .toLowerCase()
     .trim()
     .replace(/[^\w\s-]/g, "")
