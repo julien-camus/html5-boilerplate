@@ -11,15 +11,12 @@ export function processUserData(users) {
     // Safely access nested property with optional chaining
     const city = user.address?.city?.toUpperCase() ?? "UNKNOWN";
 
-    // Use strict equality
-    if (user.age === 18) {
-      user.isAdult = true;
-    }
+    const isAdult = user.age >= 18;
 
     results.push({
       name: user.name,
       city,
-      isAdult: user.isAdult || false,
+      isAdult,
       userId: user.id,
     });
   }
