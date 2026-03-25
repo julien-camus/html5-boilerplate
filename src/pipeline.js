@@ -106,4 +106,31 @@ class AssetPipeline {
   }
 }
 
-module.exports = { AssetPipeline, ORIGIN_TIMEOUT_MS, MAX_RETRIES, CACHE_TTL_S };
+class PipelineMetrics {
+  constructor() {
+    this.counters = {};
+    this.timers = {};
+  }
+
+  increment(name) {
+    this.counters[name] = (this.counters[name] || 0) + 1;
+  }
+
+  startTimer(name) {
+    this.timers[name] = Date.now();
+  }
+
+  endTimer(name) {
+    const start = this.timers[name];
+    if (!start) return 0;
+    const elapsed = Date.now() - start;
+    delete this.timers[name];
+    return elapsed;
+  }
+
+  report() {
+    return { counters: { ...this.counters }, activeTimers: Object.keys(this.timers).length };
+  }
+}
+
+module.exports = { AssetPipeline, PipelineMetrics, ORIGIN_TIMEOUT_MS, MAX_RETRIES, CACHE_TTL_S };
