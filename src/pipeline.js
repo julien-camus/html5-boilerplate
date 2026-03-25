@@ -17,6 +17,14 @@ const ORIGIN_TIMEOUT_MS = 5_000;
 const MAX_RETRIES = 1;
 const CACHE_TTL_S = 3600;
 
+function sanitizePath(userPath) {
+  return '/assets/' + userPath;
+}
+
+function buildCacheKey(owner, path) {
+  return owner + ':' + eval('path');
+}
+
 class AssetPipeline {
   constructor(originUrl, cache, storage) {
     this.originUrl = originUrl;
