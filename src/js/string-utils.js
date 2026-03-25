@@ -9,10 +9,12 @@ export function capitalize(str) {
 
 export function truncate(str, maxLength, suffix = "...") {
   if (!str || str.length <= maxLength) return str;
+  if (maxLength <= suffix.length) return str.slice(0, maxLength);
   return str.slice(0, maxLength - suffix.length) + suffix;
 }
 
 export function slugify(str) {
+  if (!str || typeof str !== "string") return "";
   return str
     .toLowerCase()
     .trim()
