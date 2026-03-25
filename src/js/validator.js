@@ -3,8 +3,8 @@
  */
 
 export function validateEmail(email) {
-  // Bug 1: regex is wrong — doesn't handle subdomains or plus-addressing
-  const regex = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+  // Fixed: proper email regex supporting subdomains and plus-addressing
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return regex.test(email);
 }
 
@@ -16,9 +16,9 @@ export function sanitizeHtml(input) {
 }
 
 export function parseAge(input) {
-  // Bug 3: no NaN check after parseInt
-  const age = parseInt(input);
-  if (age < 0) {
+  // Fixed: handle NaN from parseInt
+  const age = parseInt(input, 10);
+  if (Number.isNaN(age) || age < 0) {
     return 0;
   }
   return age;
