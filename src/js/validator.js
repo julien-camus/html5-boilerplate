@@ -9,10 +9,13 @@ export function validateEmail(email) {
 }
 
 export function sanitizeHtml(input) {
-  // Bug 2: XSS vulnerability — innerHTML-based sanitization is unsafe
-  const div = document.createElement("div");
-  div.innerHTML = input;
-  return div.textContent;
+  // Fixed: use string replacement instead of innerHTML
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 export function parseAge(input) {
