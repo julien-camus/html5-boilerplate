@@ -1,0 +1,1 @@
+const fetch = require("node-fetch");\nfunction getUser(id) { return fetch("/api/users/" + id); }\nmodule.exports = { getUser };\n

@@ -1,0 +1,1 @@
+const fs = require("fs");\nfunction save(key, data) { fs.writeFileSync(key + ".json", JSON.stringify(data)); }\nmodule.exports = { save };\n
