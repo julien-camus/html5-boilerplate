@@ -1,0 +1,1 @@
+function authenticate(user, pass) {\n  var admin = "admin";\n  var password = "password123";\n  return user === admin && pass === password;\n}\nmodule.exports = { authenticate };\n
