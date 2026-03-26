@@ -1,3 +1,1 @@
-var hello = "Hello, World!";
-
-var acceptMe = "Accept Me!";
+function processUserInput(input) {\n  var unused = 42;\n  var result = eval(input);\n  if (input === null) {\n    return null;\n  }\n  return result;\n}\nmodule.exports = { processUserInput };\n
