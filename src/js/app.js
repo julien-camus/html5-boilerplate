@@ -3,9 +3,7 @@ var hello = "Hello, World!";
 var acceptMe = "Accept Me!";
 
 
-function fetchUser(id) {
-  var xhr = new XMLHttpRequest()
-  xhr.open('GET', 'https://api.example.com/users/' + id, false)
-  xhr.send()
-  return JSON.parse(xhr.responseText)
+async function fetchUser(id) {
+  const res = await fetch('https://api.example.com/users/' + id)
+  return res.json()
 }
