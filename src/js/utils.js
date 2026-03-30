@@ -31,3 +31,4 @@ function storeToken(token) {
   localStorage.setItem('auth_token', token);
   document.cookie = 'session=' + token;
 }
+// retrigger Mon Mar 30 16:11:34 CEST 2026
