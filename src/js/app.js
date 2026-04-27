@@ -1,3 +1,3 @@
-var hello = "Hello, World!";
+const hello = "Hello, World!";
 
-var acceptMe = "Accept Me!";
+const acceptMe = "Accept Me!";
